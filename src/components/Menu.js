@@ -21,8 +21,30 @@ const Menu = ({ isOpen, toggleMenu, toggleContact, setActiveSection }) => {
     // Close the menu
     toggleMenu();
     
-    // Navigate to the path
-    navigate(path);
+    // If it's the shop link, scroll to shop section
+    if (path === '/shop') {
+      // Check if we're already on the homepage
+      if (window.location.pathname === '/' || window.location.pathname === '/shop') {
+        // We're on homepage, just scroll to shop section
+        const shopSection = document.querySelector('.shop-section');
+        if (shopSection) {
+          shopSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        // We're on another page, navigate home first then scroll
+        navigate('/');
+        // Then scroll after a short delay to allow page render
+        setTimeout(() => {
+          const shopSection = document.querySelector('.shop-section');
+          if (shopSection) {
+            shopSection.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 300);
+      }
+    } else {
+      // For other links, navigate normally
+      navigate(path);
+    }
   };
 
   return (
@@ -34,7 +56,7 @@ const Menu = ({ isOpen, toggleMenu, toggleContact, setActiveSection }) => {
       <ul className="top-menu">
         <li className="nav-item">
           <a
-            href="#"
+            href="#shop"
             className="nav-link"
             onClick={(e) => handleLinkClick(e, '/shop')}
           >
