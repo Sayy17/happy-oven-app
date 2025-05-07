@@ -1,4 +1,3 @@
-// App.js
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
@@ -24,6 +23,9 @@ const App = () => {
   useEffect(() => {
     console.log("Current activeSection:", activeSection);
   }, [activeSection]);
+
+  // We don't need an automatic effect to scroll to shop section
+  // This will now only happen when explicitly triggered from Menu.js
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -65,7 +67,7 @@ const App = () => {
             
             <Routes>
               <Route path="/" element={<Shop />} />
-              <Route path="/shop" element={<Shop />} />
+              <Route path="/shop" element={<Navigate to="/" replace />} />
               <Route path="/products/:id" element={<ProductDetail />} />
               <Route path="/about-us" element={<AboutUs setActiveSection={setActiveSection} />} />
               <Route path="*" element={<Navigate to="/" replace />} />
