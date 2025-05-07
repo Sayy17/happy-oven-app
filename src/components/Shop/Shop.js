@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import CategoryButtons from './CategoryButtons';
 import ProductGrid from './ProductGrid';
 import SearchComponent from './SearchComponent';
@@ -15,6 +15,7 @@ const Shop = () => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [displayedProducts, setDisplayedProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const shopSectionRef = useRef(null);
 
   
   useEffect(() => {
@@ -52,7 +53,7 @@ const Shop = () => {
   };
 
   return (
-    <section className="shop-section">
+    <section id="shop" className="shop-section" ref={shopSectionRef}>
       <div className="container">
         <h2 className="section-title">Fill your Box</h2>
         
