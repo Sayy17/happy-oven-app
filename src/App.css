@@ -1670,6 +1670,20 @@ a {
 #search-button i {
   font-size: 20px;
 }
+#clear-search{
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #4f190d;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  margin-left: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
 
 .search-results {
   margin-top: 10px;
