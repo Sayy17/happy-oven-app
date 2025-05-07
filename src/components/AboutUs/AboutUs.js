@@ -100,7 +100,7 @@ const AboutUs = () => {
         <div className="team-grid fade-in-up">
           <TeamMember icon="☕" name="Sarah Haddad" role="Developer" backInfo="Section B Group 2" />
           <TeamMember icon="🧁" name="Aya Gattal" role="Developer" backInfo="Section B Group 2" />
-          <TeamMember icon="🍞" name="Naima Labbas" role="Developer" backInfo="Section B Group 2" />
+          <TeamMember icon="🍞" name="Naima Laabas" role="Developer" backInfo="Section B Group 2" />
         </div>
 
         <h3 className="fade-in-up">Discover Our Work</h3>
