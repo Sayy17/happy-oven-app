@@ -358,6 +358,44 @@ hr {
   background: linear-gradient(to right, transparent, #ffb6c1, transparent);
   margin: 2rem 0;
 }
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .product-list {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+    padding: 0.75rem;
+  }
+  
+  .product-card {
+    border-radius: 10px;
+    padding-bottom: 1rem;
+  }
+  
+  .product-name {
+    font-size: 1.1rem;
+    margin: 0.6rem 0 0.1rem;
+  }
+  
+  .product-price {
+    font-size: 1rem;
+    margin: 0.3rem 0;
+  }
+  
+  hr {
+    height: 2px;
+    margin: 1.5rem 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .product-list {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    padding: 0.5rem;
+  }
+}
+
 /* cart panel  */
 .cart-panel {
 position: fixed;
