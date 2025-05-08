@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 
 const Menu = ({ isOpen, toggleMenu, toggleContact, setActiveSection }) => {
   const navigate = useNavigate();
+  const { toggleCart } = useCart(); // Get toggleCart function from CartContext
   
   // Handle the contact link click
   const handleContactClick = (e) => {
@@ -45,6 +47,15 @@ const Menu = ({ isOpen, toggleMenu, toggleContact, setActiveSection }) => {
       // For other links, navigate normally
       navigate(path);
     }
+  };
+
+  // Handle the "What's in my box?" click
+  const handleBoxClick = (e) => {
+    e.preventDefault();
+    toggleMenu(); // Close the menu first
+    setTimeout(() => {
+      toggleCart(); // Open the cart panel
+    }, 300);
   };
 
   return (
@@ -92,7 +103,7 @@ const Menu = ({ isOpen, toggleMenu, toggleContact, setActiveSection }) => {
       </ul>
       
       <div className="middle-item">
-        <a href="#" className="nav-link" onClick={(e) => handleLinkClick(e, '/box')}>
+        <a href="#" className="nav-link" onClick={handleBoxClick}>
           WHAT'S IN MY BOX?
         </a>
       </div>
