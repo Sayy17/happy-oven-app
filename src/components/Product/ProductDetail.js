@@ -8,7 +8,11 @@ import products from '../../data/products'; // Import products data as fallback
 const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { products: contextProducts, updateProductReviews } = useProducts();
+  const { 
+    products: contextProducts, 
+    updateProductReviews, 
+    incrementProductViews 
+  } = useProducts();
   const { addToCart } = useCart();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -27,14 +31,30 @@ const ProductDetail = () => {
     
     if (foundProduct) {
       setProduct(foundProduct);
-      // Simulate incrementProductViews logic
-      console.log(`Viewing product: ${foundProduct.name}`);
+      
+      // Check if this product has been viewed in this session
+      const viewedProducts = JSON.parse(sessionStorage.getItem('viewedProducts') || '[]');
+      
+      // If the product hasn't been viewed in this session, increment the view count
+      if (!viewedProducts.includes(parsedId)) {
+        // Add the product ID to the viewed products list
+        viewedProducts.push(parsedId);
+        sessionStorage.setItem('viewedProducts', JSON.stringify(viewedProducts));
+        
+        // Increment view count
+        if (typeof incrementProductViews === 'function') {
+          incrementProductViews(parsedId);
+          console.log(`Incremented view count for product: ${foundProduct.name}`);
+        }
+      } else {
+        console.log(`Product ${foundProduct.name} already viewed in this session`);
+      }
     } else {
       console.log("Product not found, redirecting to shop");
     }
     
     setLoading(false);
-  }, [id, contextProducts]);
+  }, [id, contextProducts, incrementProductViews]);
 
   const handleAddToCart = () => {
     if (product) {
