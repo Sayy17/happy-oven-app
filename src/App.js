@@ -10,9 +10,29 @@ import CartPanel from './components/Cart/CartPanel';
 import FloatingCartIcon from './components/Cart/FloatingCartIcon';
 import ContactPopup from './components/Contact/ContactPopup';
 import { CartProvider } from './context/CartContext';
-import { ProductProvider } from './context/ProductContext';
+import { ProductProvider, useProducts } from './context/ProductContext';
 import AboutUs from './components/AboutUs/AboutUs';
 import Notification from './components/Notification';
+
+// Component to reset views on first load if needed
+const ViewResetter = () => {
+  const { resetAllViewCounts } = useProducts();
+  
+  useEffect(() => {
+    // Check if views have been reset before in this browser
+    const viewsResetFlag = localStorage.getItem('viewsHaveBeenReset');
+    
+    if (!viewsResetFlag) {
+      // Reset views once
+      resetAllViewCounts();
+      // Set flag to prevent resetting on every load
+      localStorage.setItem('viewsHaveBeenReset', 'true');
+      console.log('All product view counts have been reset to 0');
+    }
+  }, [resetAllViewCounts]);
+  
+  return null; // This component doesn't render anything
+};
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,9 +43,6 @@ const App = () => {
   useEffect(() => {
     console.log("Current activeSection:", activeSection);
   }, [activeSection]);
-
-  // We don't need an automatic effect to scroll to shop section
-  // This will now only happen when explicitly triggered from Menu.js
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -56,6 +73,9 @@ const App = () => {
       <ProductProvider>
         <CartProvider>
           <div className="App">
+            {/* This component will reset view counts once when the app first loads */}
+            <ViewResetter />
+            
             <Header toggleMenu={toggleMenu} />
             <Menu
               isOpen={isMenuOpen}
@@ -67,7 +87,7 @@ const App = () => {
             
             <Routes>
               <Route path="/" element={<Shop />} />
-              <Route path="/shop" element={<Navigate to="/" replace />} />
+              <Route path="/shop" element={<Shop />} />
               <Route path="/products/:id" element={<ProductDetail />} />
               <Route path="/about-us" element={<AboutUs setActiveSection={setActiveSection} />} />
               <Route path="*" element={<Navigate to="/" replace />} />
