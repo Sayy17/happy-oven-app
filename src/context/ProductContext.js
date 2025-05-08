@@ -1,4 +1,3 @@
-// src/context/ProductContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import initialProducts from '../data/products';
 
@@ -32,21 +31,23 @@ export const ProductProvider = ({ children }) => {
     // Try to load products from localStorage first
     const savedProducts = localStorage.getItem('bakeryProducts');
     
-    // If products exist in localStorage, parse them and convert string numbers to actual numbers
+    // Reset flag - set to true to reset all view counts to 0
+    const shouldResetViews = true;
+    
     if (savedProducts) {
       const parsedProducts = JSON.parse(savedProducts);
       return parsedProducts.map(product => ({
         ...product,
         // Convert string values like "1.2K" to actual numbers (1200)
-        views: typeof product.views === 'string' ? parseNumericValue(product.views) : product.views,
+        views: shouldResetViews ? 0 : (typeof product.views === 'string' ? parseNumericValue(product.views) : product.views),
         sold: typeof product.sold === 'string' ? parseNumericValue(product.sold) : product.sold
       }));
     }
     
-    // Otherwise, use the initial products with converted numeric values
+    // Otherwise, use the initial products with converted numeric values and reset views
     return initialProducts.map(product => ({
       ...product,
-      views: typeof product.views === 'string' ? parseNumericValue(product.views) : product.views,
+      views: shouldResetViews ? 0 : (typeof product.views === 'string' ? parseNumericValue(product.views) : product.views),
       sold: typeof product.sold === 'string' ? parseNumericValue(product.sold) : product.sold
     }));
   });
@@ -55,6 +56,18 @@ export const ProductProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('bakeryProducts', JSON.stringify(products));
   }, [products]);
+
+  // Function to reset all view counts to zero
+  const resetAllViewCounts = () => {
+    setProducts(currentProducts => 
+      currentProducts.map(product => ({
+        ...product,
+        views: 0
+      }))
+    );
+    // Also clear the viewed products in session storage
+    sessionStorage.removeItem('viewedProducts');
+  };
 
   // Function to increment product views
   const incrementProductViews = (productId) => {
@@ -128,7 +141,8 @@ export const ProductProvider = ({ children }) => {
     incrementProductSales,
     updateProductReviews,
     formatNumber,
-    getProductsByCategory
+    getProductsByCategory,
+    resetAllViewCounts
   };
 
   return (
