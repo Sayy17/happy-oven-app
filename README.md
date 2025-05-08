@@ -12,10 +12,29 @@ Happy Oven is a responsive bakery e-commerce app featuring:
 - Code editor (VS Code recommended)
 
  Running Locally:
-1. Clone the repository:
+1. Navigate to the Project:
    ```bash
    git clone https://github.com/Sayy17/happy-oven-app.git
    cd happy-oven-app
+2. Install Dependencies:
+   (Only needed once, or if node_modules is missing)
+   ```bash
+   npm install
+   # or
+   yarn install
+3. Start the Development Server
+```bash
+npm start
+# or
+yarn start 
+
+This will:
+
+Launch the app in development mode
+
+Open http://localhost:3000 automatically in your browser
+
+Enable hot-reloading (live updates when you edit files)
 
 🌟 Features Implemented:
 ✅ Core Requirements
