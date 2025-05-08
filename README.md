@@ -22,12 +22,14 @@ Happy Oven is a responsive bakery e-commerce app featuring:
    npm install
    # or
    yarn install
-3. Start the Development Server
-```bash
-npm start
-# or
-yarn start 
+   
+3. Start the Development Server:
+   ```bash
+  npm start
+  # or
+  yarn start
 
+  
 This will:
 
 Launch the app in development mode
@@ -75,3 +77,5 @@ Developed by:
 [Sarah Haddad]
 [Aya Gattal]
 [Naima Laabas]
+
+
