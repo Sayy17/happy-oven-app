@@ -802,7 +802,7 @@ color: #eab161;
   border-radius: 8px;
 }
 
-/* Fix for star ratings */
+/* star ratings */
 .review-rating {
   margin-bottom: 5px;
 }
@@ -820,7 +820,7 @@ color: #eab161;
   line-height: 1.4;
 }
 
-/* Review Form */
+/* review Form */
 .review-form {
   width: 100%;
   box-sizing: border-box;
@@ -924,7 +924,7 @@ color: #eab161;
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-/* Product not found */
+/* product not found */
 .product-not-found {
   text-align: center;
   padding: 40px 20px;
@@ -1178,7 +1178,7 @@ color: #eab161;
   color: #79391a;
 }
 
-/* Manage box section */
+/* manage box section */
 .manage-box {
   margin: 15px 0;
   padding: 15px;
