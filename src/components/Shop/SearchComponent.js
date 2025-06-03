@@ -42,8 +42,7 @@ const SearchComponent = ({ onSearch, activeCategory }) => {
     onSearch?.(matchedProducts, trimmedTerm);
   }, [activeCategory, onSearch, products, searchTerm]);
 
-  // Remove debounced search so it only happens on button click or Enter key
-  // We don't want automatic searching while typing anymore
+  // we don't want automatic searching while typing anymore
   
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
@@ -53,7 +52,6 @@ const SearchComponent = ({ onSearch, activeCategory }) => {
 
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
-    // Clear the "isSearched" flag when user starts typing again
     if (searchResults.isSearched) {
       setSearchResults(prev => ({ ...prev, isSearched: false }));
     }
