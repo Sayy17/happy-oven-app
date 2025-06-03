@@ -7,15 +7,15 @@ const ProductGrid = ({ products, onProductClick }) => {
   const { addToCart } = useCart();
 
   const handleAddToCart = (e, product) => {
-    e.preventDefault(); // Prevent navigation
-    e.stopPropagation(); // Prevent event bubbling
+    e.preventDefault(); // prevent navigation
+    e.stopPropagation(); // prevent event bubbling
     addToCart(product);
   };
 
-  // Function to handle image errors
+  // function to handle image errors
   const handleImageError = (e) => {
-    e.target.onerror = null; // Prevent infinite loop
-    e.target.src = '/images/placeholder.jpg'; // Set default placeholder
+    e.target.onerror = null; // prevent infinite loop
+    e.target.src = '/images/placeholder.jpg'; // set default placeholder
   };
 
   return (
