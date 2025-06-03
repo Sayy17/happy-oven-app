@@ -3,7 +3,7 @@ import CategoryButtons from './CategoryButtons';
 import ProductGrid from './ProductGrid';
 import SearchComponent from './SearchComponent';
 import { useProducts } from '../../context/ProductContext';
-import productsData from '../../data/products'; // Import the data directly
+import productsData from '../../data/products'; // import the data directly
 
 const Shop = () => {
   const { 
@@ -21,7 +21,7 @@ const Shop = () => {
   useEffect(() => {
     setIsLoading(true);
     
-    // Use imported products as fallback if context is empty
+    // use imported products as fallback if context is empty
     const productsToUse = contextProducts && contextProducts.length > 0 
       ? contextProducts 
       : productsData;
@@ -43,13 +43,11 @@ const Shop = () => {
   };
   
   const handleProductClick = (productId) => {
-    // If using context method for tracking views
+    // if using context method for tracking views
     if (typeof incrementProductViews === 'function') {
       incrementProductViews(productId);
     }
-    
-    // Log for debugging
-    console.log(`Product ${productId} clicked`);
+        console.log(`Product ${productId} clicked`);
   };
 
   return (
