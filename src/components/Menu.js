@@ -4,9 +4,9 @@ import { useCart } from '../context/CartContext';
 
 const Menu = ({ isOpen, toggleMenu, toggleContact, setActiveSection }) => {
   const navigate = useNavigate();
-  const { toggleCart } = useCart(); // Get toggleCart function from CartContext
+  const { toggleCart } = useCart(); // get toggleCart function from CartContext
   
-  // Handle the contact link click
+  // handle the contact link click
   const handleContactClick = (e) => {
     e.preventDefault();
     toggleMenu();
@@ -15,27 +15,27 @@ const Menu = ({ isOpen, toggleMenu, toggleContact, setActiveSection }) => {
     }, 300);
   };
   
-  // Handle navigation links
+  // handle navigation links
   const handleLinkClick = (e, path) => {
     e.preventDefault();
     console.log(`Link clicked: ${path}`);
     
-    // Close the menu
+    // close the menu
     toggleMenu();
     
-    // If it's the shop link, scroll to shop section
+    //iIf it's the shop link, scroll to shop section
     if (path === '/shop') {
-      // Check if we're already on the homepage
+      // check if we're already on the homepage
       if (window.location.pathname === '/' || window.location.pathname === '/shop') {
-        // We're on homepage, just scroll to shop section
+        // we're on homepage just scroll to shop section
         const shopSection = document.querySelector('.shop-section');
         if (shopSection) {
           shopSection.scrollIntoView({ behavior: 'smooth' });
         }
       } else {
-        // We're on another page, navigate home first then scroll
+        // we're on another page navigate home first then scroll
         navigate('/');
-        // Then scroll after a short delay to allow page render
+        // then scroll after a short delay to allow page render
         setTimeout(() => {
           const shopSection = document.querySelector('.shop-section');
           if (shopSection) {
@@ -44,17 +44,17 @@ const Menu = ({ isOpen, toggleMenu, toggleContact, setActiveSection }) => {
         }, 300);
       }
     } else {
-      // For other links, navigate normally
+      // for other links navigate normally
       navigate(path);
     }
   };
 
-  // Handle the "What's in my box?" click
+  // handle the "what's in my box?" click
   const handleBoxClick = (e) => {
     e.preventDefault();
-    toggleMenu(); // Close the menu first
+    toggleMenu(); // close the menu first
     setTimeout(() => {
-      toggleCart(); // Open the cart panel
+      toggleCart(); // open the cart panel
     }, 300);
   };
 
