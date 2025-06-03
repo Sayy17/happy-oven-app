@@ -1,4 +1,3 @@
-// src/components/Cart/FloatingCartIcon.js
 import React from 'react';
 import { useCart } from '../../context/CartContext';
 
