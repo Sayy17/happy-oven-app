@@ -8,13 +8,13 @@ const ReviewForm = ({ onSubmit }) => {
   
   const handleStarClick = (selectedRating) => {
     setRating(selectedRating);
-    setError(''); // Clear any error when user selects a rating
+    setError(''); // clear any error when user selects a rating
   };
   
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Validate form
+    // validate form
     if (rating === 0) {
       setError('Please select a star rating');
       return;
@@ -25,11 +25,11 @@ const ReviewForm = ({ onSubmit }) => {
       return;
     }
     
-    // Submit review
+    // submit review
     onSubmit(rating, comment);
     setSubmitted(true);
     
-    // Reset form after submission
+    // reset form after submission
     setTimeout(() => {
       setRating(0);
       setComment('');
