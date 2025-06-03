@@ -5,11 +5,9 @@ const ProductContext = createContext();
 
 export const useProducts = () => useContext(ProductContext);
 
-// Helper function to parse values like "1.2K" into numeric values (1200)
 const parseNumericValue = (value) => {
   if (typeof value !== 'string') return value;
   
-  // Remove any non-numeric characters except '.' and K/M suffixes
   const match = value.replace(/[^\d.KMkm]/g, '').match(/^(\d+(\.\d+)?)([KMkm])?$/);
   
   if (!match) return 0;
@@ -28,23 +26,20 @@ const parseNumericValue = (value) => {
 
 export const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState(() => {
-    // Try to load products from localStorage first
     const savedProducts = localStorage.getItem('bakeryProducts');
     
-    // Reset flag - set to true to reset all view counts to 0
     const shouldResetViews = true;
     
     if (savedProducts) {
       const parsedProducts = JSON.parse(savedProducts);
       return parsedProducts.map(product => ({
         ...product,
-        // Convert string values like "1.2K" to actual numbers (1200)
+        // Convert string values
         views: shouldResetViews ? 0 : (typeof product.views === 'string' ? parseNumericValue(product.views) : product.views),
         sold: typeof product.sold === 'string' ? parseNumericValue(product.sold) : product.sold
       }));
     }
     
-    // Otherwise, use the initial products with converted numeric values and reset views
     return initialProducts.map(product => ({
       ...product,
       views: shouldResetViews ? 0 : (typeof product.views === 'string' ? parseNumericValue(product.views) : product.views),
@@ -52,12 +47,12 @@ export const ProductProvider = ({ children }) => {
     }));
   });
 
-  // Save products to localStorage whenever they change
+  // save products to localsorage whenever they change
   useEffect(() => {
     localStorage.setItem('bakeryProducts', JSON.stringify(products));
   }, [products]);
 
-  // Function to reset all view counts to zero
+  // function to reset all view counts to zero
   const resetAllViewCounts = () => {
     setProducts(currentProducts => 
       currentProducts.map(product => ({
@@ -65,11 +60,11 @@ export const ProductProvider = ({ children }) => {
         views: 0
       }))
     );
-    // Also clear the viewed products in session storage
+    // also clear the viewed products in session storage
     sessionStorage.removeItem('viewedProducts');
   };
 
-  // Function to increment product views
+  // fnction to increment product views
   const incrementProductViews = (productId) => {
     setProducts(currentProducts => 
       currentProducts.map(product => 
@@ -83,7 +78,7 @@ export const ProductProvider = ({ children }) => {
     );
   };
 
-  // Function to increment product sales
+  // function to increment product sales
   const incrementProductSales = (productId, quantity = 1) => {
     setProducts(currentProducts => 
       currentProducts.map(product => 
@@ -111,7 +106,7 @@ export const ProductProvider = ({ children }) => {
     );
   };
 
-  // Function to format numbers with K, M suffixes
+  // function to format numbers with K 
   const formatNumber = (num) => {
     if (typeof num === 'string') {
       return num; // Already formatted
@@ -126,7 +121,7 @@ export const ProductProvider = ({ children }) => {
     return num.toString();
   };
 
-  // Get products by category
+  // get products by category
   const getProductsByCategory = (category) => {
     if (category === 'all') {
       return products;
