@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// Reusable team member card
 const TeamMember = ({ icon, name, role, backInfo }) => {
   const [flipped, setFlipped] = useState(false);
 
@@ -71,7 +70,7 @@ const AboutUs = () => {
       observer.observe(aboutSectionRef.current);
     }
 
-    return () => observer.disconnect(); // Cleanup
+    return () => observer.disconnect(); // cleanup
   }, []);
 
   const goToShop = () => {
