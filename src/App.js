@@ -14,24 +14,24 @@ import { ProductProvider, useProducts } from './context/ProductContext';
 import AboutUs from './components/AboutUs/AboutUs';
 import Notification from './components/Notification';
 
-// Component to reset views on first load if needed
+// component to reset views on first load if needed
 const ViewResetter = () => {
   const { resetAllViewCounts } = useProducts();
   
   useEffect(() => {
-    // Check if views have been reset before in this browser
+    // check if views have been reset before in this browser
     const viewsResetFlag = localStorage.getItem('viewsHaveBeenReset');
     
     if (!viewsResetFlag) {
-      // Reset views once
+      // reset views once
       resetAllViewCounts();
-      // Set flag to prevent resetting on every load
+      // set flag to prevent resetting on every load
       localStorage.setItem('viewsHaveBeenReset', 'true');
       console.log('All product view counts have been reset to 0');
     }
   }, [resetAllViewCounts]);
   
-  return null; // This component doesn't render anything
+  return null; // this component doesn't render anything
 };
 
 const App = () => {
@@ -73,7 +73,7 @@ const App = () => {
       <ProductProvider>
         <CartProvider>
           <div className="App">
-            {/* This component will reset view counts once when the app first loads */}
+            {/* this component will reset view counts once when the app first loads */}
             <ViewResetter />
             
             <Header toggleMenu={toggleMenu} />
