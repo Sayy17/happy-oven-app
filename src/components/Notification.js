@@ -1,11 +1,10 @@
-// src/components/Notifications.js
 import React, { useEffect, useState } from 'react';
 
 const Notification = ({ message }) => {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    // Make notification disappear after 3 seconds
+    // make notification disappear after 3 seconds
     const timer = setTimeout(() => {
       setVisible(false);
     }, 3000);
