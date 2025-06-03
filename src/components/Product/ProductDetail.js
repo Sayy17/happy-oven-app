@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useProducts } from '../../context/ProductContext';
 import { useCart } from '../../context/CartContext';
 import ReviewForm from './ReviewForm';
-import products from '../../data/products'; // Import products data as fallback
+import products from '../../data/products'; 
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -20,28 +20,28 @@ const ProductDetail = () => {
   useEffect(() => {
     setLoading(true);
     
-    // Use either context products or imported products as fallback
+    // use either context products or imported products 
     const productsToUse = (contextProducts && contextProducts.length > 0) 
       ? contextProducts 
       : products;
     
-    // Find the product by ID from the URL parameter
+    // find the product by ID  
     const parsedId = parseInt(id);
     const foundProduct = productsToUse.find(p => p.id === parsedId);
     
     if (foundProduct) {
       setProduct(foundProduct);
       
-      // Check if this product has been viewed in this session
+      // check if this product has been viewed in this session
       const viewedProducts = JSON.parse(sessionStorage.getItem('viewedProducts') || '[]');
       
-      // If the product hasn't been viewed in this session, increment the view count
+      // if the product hasn't been viewed in this session increment the view count
       if (!viewedProducts.includes(parsedId)) {
-        // Add the product ID to the viewed products list
+        // add the product ID to the viewed products list
         viewedProducts.push(parsedId);
         sessionStorage.setItem('viewedProducts', JSON.stringify(viewedProducts));
         
-        // Increment view count
+        // increment view count
         if (typeof incrementProductViews === 'function') {
           incrementProductViews(parsedId);
           console.log(`Incremented view count for product: ${foundProduct.name}`);
@@ -59,7 +59,7 @@ const ProductDetail = () => {
   const handleAddToCart = () => {
     if (product) {
       addToCart(product);
-      // Show a brief notification if desired
+      // show a brief notification if desired
       alert('Added to cart!');
     }
   };
@@ -72,12 +72,12 @@ const ProductDetail = () => {
         date: new Date().toISOString()
       };
       
-      // Update the product reviews in context if available
+      // update the product reviews in context if available
       if (typeof updateProductReviews === 'function') {
         updateProductReviews(product.id, newReview);
       }
       
-      // Also update local state to reflect changes immediately
+      // also update local state to reflect changes immediately
       setProduct(prev => ({
         ...prev,
         reviews: [...(prev.reviews || []), newReview]
@@ -89,7 +89,7 @@ const ProductDetail = () => {
     navigate('/shop');
   };
 
-  // Helper function to render star ratings
+  // helper function to render star ratings
   const renderStars = (rating) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
