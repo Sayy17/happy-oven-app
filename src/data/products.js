@@ -1,6 +1,6 @@
 // src/data/products.js
 const products = [
-  // Cookies Category
+  // cookies Category
   {
     id: 1,
     name: "Caramel Popcorn Cookie",
@@ -63,8 +63,7 @@ const products = [
     reviews: []
   },
   
-  // Rest of your products...
-  // Savory Foods Category
+  // savory foods category
   {
     id: 7,
     name: "Bread with Salmon",
@@ -126,7 +125,7 @@ const products = [
     reviews: []
   },
   
-  // Pastries Category
+  // pastries category
   {
     id: 13,
     name: "Macarons",
@@ -218,7 +217,7 @@ const products = [
     reviews: []
   },
   
-  // Cakes Category
+  // cakes category
   {
     id: 22,
     name: "Raspberry Cake",
