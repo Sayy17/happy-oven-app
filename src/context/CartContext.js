@@ -1,25 +1,25 @@
 // src/context/CartContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-// Create the cart context
+// create the cart context
 const CartContext = createContext();
 
-// Hook to use the cart context
+// hook to use the cart context
 export const useCart = () => useContext(CartContext);
 
-// Cart provider component
+// cart provider component
 export const CartProvider = ({ children }) => {
-  // State for cart items, cart open status, and total
+  // state for cart items, cart open status, and total
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   
-  // Calculate item count (total quantity of all items)
+  // calculate item count (total quantity of all items)
   const itemCount = cart.reduce((total, item) => total + item.quantity, 0);
   
-  // Calculate total price
+  // calculate total price
   const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
-  // Load cart from localStorage on initial render
+  // load cart from localstorage on initial render
   useEffect(() => {
     const savedCart = localStorage.getItem('happyOvenCart');
     if (savedCart) {
@@ -32,38 +32,38 @@ export const CartProvider = ({ children }) => {
     }
   }, []);
 
-  // Save cart to localStorage whenever it changes
+  // save cart to localstorage whenever it changes
   useEffect(() => {
     localStorage.setItem('happyOvenCart', JSON.stringify(cart));
   }, [cart]);
 
-  // Toggle cart open/closed
+  // toggle cart open/closed
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
   };
 
-  // Add item to cart
+  // add item to cart
   const addToCart = (product) => {
     setCart(prevCart => {
-      // Check if product already exists in cart
+      // check if product already exists in cart
       const existingItem = prevCart.find(item => item.id === product.id);
       
       if (existingItem) {
-        // Increase quantity if item already exists
+        // increase quantity if item already exists
         return prevCart.map(item => 
           item.id === product.id 
             ? { ...item, quantity: item.quantity + 1 } 
             : item
         );
       } else {
-        // Add new item with quantity 1 and selected true
+        // add new item with quantity 1 and selected true
         return [...prevCart, { ...product, quantity: 1, selected: true }];
       }
     });
     
   };
 
-  // Update item quantity
+  // update item quantity
   const updateQuantity = (itemId, change) => {
     setCart(prevCart => {
       return prevCart.map(item => {
@@ -76,12 +76,12 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  // Remove item from cart
+  // remove item from cart
   const removeFromCart = (itemId) => {
     setCart(prevCart => prevCart.filter(item => item.id !== itemId));
   };
 
-  // Toggle item selection
+  // toggle item selection
   const toggleItemSelection = (itemId) => {
     setCart(prevCart => 
       prevCart.map(item => 
@@ -92,17 +92,17 @@ export const CartProvider = ({ children }) => {
     );
   };
 
-  // Remove selected items
+  // remove selected items
   const removeSelectedItems = () => {
     setCart(prevCart => prevCart.filter(item => !item.selected));
   };
 
-  // Clear cart
+  // clear cart
   const clearCart = () => {
     setCart([]);
   };
 
-  // Context value to provide
+  // context value to provide
   const value = {
     cart,
     isCartOpen,
