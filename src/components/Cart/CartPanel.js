@@ -1,4 +1,3 @@
-// src/components/Cart/CartPanel.js
 import React from 'react';
 import { useCart } from '../../context/CartContext';
 
@@ -14,15 +13,15 @@ const CartPanel = () => {
     updateQuantity
   } = useCart();
   
-  // Function to handle updating the cart
+  // function to handle updating the cart
   const handleUpdateCart = () => {
-    // Show a toast or notification
+    // show notification
     const notification = document.createElement('div');
     notification.className = 'cart-notification';
     notification.textContent = 'Cart updated!';
     document.body.appendChild(notification);
     
-    // Remove the notification after 3 seconds
+    // remove the notification after 3 seconds
     setTimeout(() => {
       notification.classList.add('fade-out');
       setTimeout(() => {
@@ -31,15 +30,15 @@ const CartPanel = () => {
     }, 2500);
   };
   
-  // Function to handle proceeding to checkout - now works the same as handleUpdateCart
+  // function to handle proceeding to checkout
   const handleCheckout = () => {
-    // Show a toast or notification
+    // show anotification
     const notification = document.createElement('div');
     notification.className = 'cart-notification';
     notification.textContent = 'Proceeding to checkout!';
     document.body.appendChild(notification);
     
-    // Remove the notification after 3 seconds
+    // remove the notification after 3 seconds
     setTimeout(() => {
       notification.classList.add('fade-out');
       setTimeout(() => {
