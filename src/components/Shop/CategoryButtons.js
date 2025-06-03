@@ -1,4 +1,3 @@
-// src/components/Shop/CategoryButtons.js
 import React from 'react';
 import PropTypes from 'prop-types';
 
