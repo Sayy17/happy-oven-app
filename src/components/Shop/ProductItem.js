@@ -14,7 +14,7 @@ const ProductItem = ({ product }) => {
 
   const handleImageError = (e) => {
     e.target.onerror = null;
-    e.target.src = '/images/placeholder.jpg'; // Make sure this exists
+    e.target.src = '/images/placeholder.jpg'; // make sure this exists
   };
 
   return (
